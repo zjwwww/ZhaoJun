@@ -1,6 +1,7 @@
 package com.zhaojun.nov.springbootzhaojun.doman;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author DELL
@@ -15,7 +16,7 @@ public class User {
      */
     @Id //该字段对应数据库的主键
     @GeneratedValue(strategy = GenerationType.IDENTITY) //设置自增长
-    @Column(name="id")
+    @Column(name="account_id")
     private Long id;
 
     /**
@@ -49,6 +50,9 @@ public class User {
      * 状态：1
      */
     private boolean isActive;
+
+    @OneToMany(mappedBy = "user",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private List<Diary> diaries;
 
     public Long getId() {
         return id;
@@ -106,5 +110,11 @@ public class User {
         isActive = active;
     }
 
+    public List<Diary> getDiaries() {
+        return diaries;
+    }
 
+    public void setDiaries(List<Diary> diaries) {
+        this.diaries = diaries;
+    }
 }
