@@ -3,10 +3,14 @@ package com.zhaojun.nov.springbootzhaojun.controller;
 import com.zhaojun.nov.springbootzhaojun.doman.User;
 import com.zhaojun.nov.springbootzhaojun.service.UserService;
 import com.zhaojun.nov.springbootzhaojun.util.Result;
+import config.PropertiesListenerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author DELL
@@ -19,9 +23,10 @@ public class TestWeb {
     private UserService userService;
 
     @GetMapping("/test")
-    public String test() {
-        System.out.println("/sdsdsz");
-        return "bbb";
+    public Map<String, Object> test() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.putAll(PropertiesListenerConfig.getAllProperty());
+        return map;
     }
 
     @GetMapping("/testUser")
@@ -29,4 +34,31 @@ public class TestWeb {
 
         return Result.ok().data(userService.getUser());
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

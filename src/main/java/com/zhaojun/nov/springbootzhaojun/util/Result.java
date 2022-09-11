@@ -1,5 +1,7 @@
 package com.zhaojun.nov.springbootzhaojun.util;
 
+import config.PropertiesListenerConfig;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +35,7 @@ public class Result {
         Result result = new Result();
         result.setSuccess(true);
         result.setCode(200);
+        result.setMessage(PropertiesListenerConfig.getProperty("200"));
         return result;
     }
 
@@ -40,6 +43,7 @@ public class Result {
         Result result = new Result();
         result.setSuccess(false);
         result.setCode(500);
+        result.setMessage(PropertiesListenerConfig.getProperty("500"));
         return result;
     }
 
@@ -50,6 +54,12 @@ public class Result {
 
     public  Result data(String key,Object data) {
         this.data.put(key, data);
+        return this;
+    }
+
+    public Result code(Integer code) {
+        this.code = code;
+        this.message = PropertiesListenerConfig.getProperty(code.toString());
         return this;
     }
     public boolean isSuccess() {
@@ -66,6 +76,7 @@ public class Result {
 
     public void setCode(Integer code) {
         this.code = code;
+        this.message = PropertiesListenerConfig.getProperty(code.toString());
     }
 
     public String getMessage() {
